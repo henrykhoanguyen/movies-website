@@ -9,7 +9,7 @@ dotenv.config({ path: "./config/config.env" });
 
 
 // Route files
-const movies = require('./routes/movies');
+const movies = require('./routes/movies.route');
 
 const app = express();
 

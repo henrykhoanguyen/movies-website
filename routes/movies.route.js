@@ -3,7 +3,7 @@ const express = require("express");
 const {
   getMovies,
   getMovieById
-} = require("../controllers/movies");
+} = require("../controllers/movies.controller");
 
 const router = express.Router();
 
