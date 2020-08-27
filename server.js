@@ -1,6 +1,5 @@
 const express = require("express");
 const dotenv = require("dotenv");
-// const mongoose = require("mongoose");
 const path = require("path");
 const colors = require("colors");
 const connectDB = require("./config/db");
@@ -8,10 +7,9 @@ const connectDB = require("./config/db");
 // Load env vars
 dotenv.config({ path: "./config/config.env" });
 
-connectDB();
 
 // Route files
-const movies = require("./routes/movies");
+const movies = require('./routes/movies');
 
 const app = express();
 
