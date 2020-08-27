@@ -1,0 +1,12 @@
+Some Raw Idea for this project
+- Using mySQL for backend of this project. MySQL will be used to store information about food/groceries.
+- Parsing data from fdc food data to make a file so that it can be write to mySQL
+- Food data is already connected by food id so it shouldn't be too difficult to generate query file.
+
+Type of Food: branded_food, sample_food, sub_sample_food, survey_fndds_food, market_acquisition
+
+Categorize Food: 
+  - The branched_food.csv did not categorize food well. So will need to write function to categorize it.
+  - Found a helpful link on cdc/fdc page that help finding key word to categorize it.
+    -> https://www.cdc.gov/foodsafety/pdfs/IFSAC_Food_Categories_examples-H.pdf
+  - A problem arises which is that the link isn't helpful with categorize processed foods; food with many ingredients.
