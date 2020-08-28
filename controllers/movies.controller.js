@@ -1,41 +1,48 @@
+const db = require('../config/db');
 const Movies = require('../model/Movies');
 
 // @desc    Get all movies
 // @route   GET /api/v1/movies/
 // @access  Public
-exports.getMovies = (req, res, next) => {
-  Movies.getAllMovies((err, data) => {
-    if (err) {
-      res.status(401).json({
-        success: false,
-        message: err
-      });
-    }
-    res.status(200).json({
-      success: true,
-      size: data.length,
-      data: data
+exports.getMovies = async (req, res, next) => {
+  const movies = await Movies.findAll({ limit: 10 });
+
+  // console.log(movies);
+
+  if (!movies) {
+    res.status(401).json({
+      success: false,
+      message: "No record was found..."
     });
+  }
+
+  res.status(200).json({
+    success: true,
+    size: movies.length,
+    data: movies
   });
-}
+
+};
 
 // @desc    Get single movie
 // @route   GET /api/v1/movies/:id
 // @access  Public
-exports.getMovieById = (req, res, next) => {
+exports.getMovieById = async (req, res, next) => {
   const id = req.params.id;
+  const movie = await Movies.findByPk(id);
 
-  Movies.getMovieById(id, (err, data) => {
-    if (err) {
-      res.status(401).json({
-        success: false,
-        message: err
-      });
-    } else {
-      res.status(200).json({
-        success: true,
-        data: data
-      });
-    }
+  // console.log(movie);
+
+  if (!movie) {
+    res.status(401).json({
+      success: false,
+      message: "No record was found..."
+    });
+  }
+
+  res.status(200).json({
+    success: true,
+    data: movie
   });
-}
+
+};

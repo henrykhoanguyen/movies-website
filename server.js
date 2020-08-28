@@ -3,10 +3,15 @@ const dotenv = require("dotenv");
 const path = require("path");
 const colors = require("colors");
 const connectDB = require("./config/db");
+const bodyParser = require("body-parser");
 
 // Load env vars
 dotenv.config({ path: "./config/config.env" });
 
+// Connect to DB
+connectDB.authenticate()
+  .then(() => console.log("Database connected...".cyan.bold))
+  .catch(err => console.log("Error: " + err));
 
 // Route files
 const movies = require('./routes/movies.route');
@@ -14,9 +19,13 @@ const movies = require('./routes/movies.route');
 const app = express();
 
 // Body parser
-app.use(express.json());
+app.use(bodyParser.json());
+// parse requests of content-type - application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use('/api/v1/movies', movies);
+
+connectDB.sync();
 
 const PORT = process.env.PORT || 5000;
 
