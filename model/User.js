@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 const connectDB = require("../config/db");
 
-const User = connectDB.define('customer', {
+const User = connectDB.define('customers', {
   // id integer AUTO_INCREMENT primary key,
   id: {
     type: Sequelize.INTEGER,

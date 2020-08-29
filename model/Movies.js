@@ -1,53 +1,28 @@
 const Sequelize = require("sequelize");
 const connectDB = require("../config/db");
 
-// var Movies = (data) => {
-//   this.data = data.data;
-//   this.status = data.status;
-//   this.createAt = new Date();
-// };
-
 const Movies = connectDB.define('movies', {
+  // id varchar(10) primary key,
   id: {
     type: Sequelize.STRING,
     primaryKey: true
   },
+  // title varchar(100) not null,
   title: {
     type: Sequelize.STRING,
     allowNull: false
   },
+  // year integer not null,
   year: {
     type: Sequelize.INTEGER,
     allowNull: false
   },
+  // director varchar(100) not null
   director: {
     type: Sequelize.STRING,
     allowNull: false
   }
 });
 
-// Movies.getAllMovies = (result) => {
-//   connectDB.query("SELECT * FROM movies LIMIT 10", (err, res) => {
-//     if(err) {
-//       console.error("Error: ", err);
-//       result(null, err);
-//     } else {
-//       // console.log("Result: ", res);
-//       result(null, res);
-//     }
-//   });
-// };
-
-// Movies.getMovieById = (movieId, result) => {
-//   connectDB.query("SELECT * FROM movies WHERE movies.id = ?", movieId, (err, res) => {
-//     if(err) {
-//       console.error("Error: ", err);
-//       result(null, err);
-//     } else {
-//       console.log("Result: ", res);
-//       result(null, res);
-//     }
-//   });
-// };
 
 module.exports = Movies;
