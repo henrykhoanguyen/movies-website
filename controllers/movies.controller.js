@@ -3,12 +3,34 @@ const Movies = require('../model/Movies');
 const Stars = require('../model/Stars');
 const StarsInMovies = require('../model/StarsInMovies');
 const Op = db.Sequelize.Op;
+// Association
+Movies.hasMany(StarsInMovies, { foreignKey: 'movieId' });
+Stars.hasMany(StarsInMovies, { foreignKey: 'starId' });
+StarsInMovies.belongsTo(Movies, { foreignKey: 'movieId' });
+StarsInMovies.belongsTo(Stars, { foreignKey: 'starId' });
+
 
 // @desc    Get all movies
 // @route   GET /api/v1/movies/
 // @access  Public
 exports.getMovies = async (req, res, next) => {
-  const movies = await Movies.findAll({ limit: 10 });
+
+  // TODO: need record of 50 movies with stars associate with those movies.
+  // not 50 records of stars belong to movie. NEED TO FIX THIS!!!
+  const movies = await Movies.findAll({ 
+    // attributes: [ 'id', 'title', 'year', 'director' ],
+    include: [{
+      model: StarsInMovies,
+      attributes: ['starId'],
+      include: [
+        {
+          model: Stars,
+          required: false
+        }
+      ],
+      required: false
+    }], limit: 50
+  });
 
   // console.log(movies);
 
@@ -33,8 +55,6 @@ exports.getMovies = async (req, res, next) => {
 exports.getMovieById = async (req, res, next) => {
   const id = req.params.id;
   const movie = await Movies.findByPk(id);
-
-  // console.log(movie);
 
   if (!movie) {
     res.status(401).json({

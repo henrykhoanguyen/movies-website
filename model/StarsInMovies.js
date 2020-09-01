@@ -1,5 +1,7 @@
 const Sequelize = require('sequelize');
 const connectDB = require("../config/db");
+const Stars = require('./Stars');
+const Movies = require('./Movies');
 
 const StarsInMovies = connectDB.define('stars_in_movies', {
   // starId varchar(10) not null,
@@ -7,8 +9,9 @@ const StarsInMovies = connectDB.define('stars_in_movies', {
   starId: {
     type: Sequelize.STRING,
     allowNull: false,
+    primaryKey: true,
     references: {
-      model: 'stars',
+      model: Stars,
       key: 'id'
     }
   },
@@ -17,8 +20,9 @@ const StarsInMovies = connectDB.define('stars_in_movies', {
   movieId: {
     type: Sequelize.STRING,
     allowNull: false,
+    primaryKey: true,
     references: {
-      model: 'movies',
+      model: Movies,
       key: 'id'
     }
   }
