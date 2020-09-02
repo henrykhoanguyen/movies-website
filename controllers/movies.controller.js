@@ -15,35 +15,25 @@ StarsInMovies.belongsTo(Stars, { foreignKey: 'starId' });
 // @access  Public
 exports.getMovies = async (req, res, next) => {
 
-  // TODO: need record of 50 movies with stars associate with those movies.
-  // not 50 records of stars belong to movie. NEED TO FIX THIS!!!
-  const movies = await Movies.findAll({ 
-    // attributes: [ 'id', 'title', 'year', 'director' ],
-    include: [{
-      model: StarsInMovies,
-      attributes: ['starId'],
-      include: [
-        {
-          model: Stars,
-          required: false
-        }
-      ],
-      required: false
-    }], limit: 50
-  });
+  // Get movies from database
+  var movies = await Movies.findAll({ limit: 10 });
+
+  // Get stars from movies
+  movies = await getStars(movies);
 
   // console.log(movies);
 
-  if (!movies) {
-    res.status(401).json({
+  if (!movies || movies.length === 0) {
+    res.status(404).json({
       success: false,
       message: "No record was found..."
     });
+    return;
   }
 
   res.status(200).json({
     success: true,
-    size: movies.length,
+    size: movies.length || 0,
     data: movies
   });
 
@@ -56,11 +46,26 @@ exports.getMovieById = async (req, res, next) => {
   const id = req.params.id;
   const movie = await Movies.findByPk(id);
 
-  if (!movie) {
-    res.status(401).json({
+  const movieId = movie.dataValues.id;
+
+  const stars = await StarsInMovies.findAll({
+    where: { 
+      movieId: movieId
+    },
+    include: [{
+      model: Stars
+    }],
+    required: false
+  });
+  movie.dataValues.starsSize = stars.length || 0;
+  movie.dataValues.stars = stars;
+
+  if (!movie || movie === []) {
+    res.status(404).json({
       success: false,
       message: "No record was found..."
     });
+    return;
   }
 
   res.status(200).json({
@@ -71,20 +76,37 @@ exports.getMovieById = async (req, res, next) => {
 };
 
 // @desc    Search for movies
-// @route   GET /api/v1/movies/search/:title/:year/:director/:starName
+// @route   GET /api/v1/movies/search?:query (:query = title&year&director&starName)
 // @access  Public
 exports.search = async (req, res, next) => {
-  // const { title, year, director, starName } = req.query;
+
   const condition = {}
   var movies = null;
 
-  // TODO: need to implement sub query. nested query
   if (req.query.starName){
-    condition.starName = { [Op.like]: `%${req.query.starName}%` };
+    // SEARCH MOVIES BY STAR'S NAME
+    // Setting query condition
+    condition.name = { [Op.like]: `%${req.query.starName}%` };
 
-    movies = await Movies.findAll({ where: condition });
+    // TODO: return movies with the searched star name, currently only return searched stars with movie associate to them
+    // Get stars with search name from database
+    var movies = await Stars.findAll({ 
+      where: condition,
+      include: [{
+        model: StarsInMovies,
+        include: [{
+          model: Movies
+        }],
+        require: false
+      }],
+      require: false,
+      order: ['name']
+    });
+    // movies = await getStars(movies);
 
   } else {
+    // SEARCH MOVIES BY TITLE, YEAR, DIRECTOR
+    // Setting query condition
     if (req.query.title){
       condition.title = { [Op.like]: `%${req.query.title}%` };
     }
@@ -94,13 +116,47 @@ exports.search = async (req, res, next) => {
     if (req.query.director) {
       condition.director = { [Op.eq]: req.query.director };
     }
-    movies = await Movies.findAll({ where: condition, order: ['title']});
+
+    // Get movies from database
+    movies = await Movies.findAll({ where: condition, order: ['title'] });
+
+    // Get stars from movies
+    movies = await getStars(movies);
   }
 
-
+  if (!movies || movies.length === 0) {
+    res.status(404).json({
+      success: false,
+      message: "No record was found..."
+    });
+    return;
+  }
+  
   res.status(200).json({
     success: true,
     size: movies.length,
     data: movies
   });
+};
+
+const getStars = async (movies) => {
+  
+    for(var i = 0; i < movies.length; i++) {
+      var movieId = movies[i].dataValues.id;
+  
+      const stars = await StarsInMovies.findAll({
+        where: { 
+          movieId: movieId
+        },
+        include: [{
+          model: Stars
+        }],
+        required: false
+      });
+
+      movies[i].dataValues.starsSize = stars.length;
+      movies[i].dataValues.stars = stars;
+    }
+
+    return movies;
 };

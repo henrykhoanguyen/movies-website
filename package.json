@@ -1,25 +1,25 @@
 {
-  "name": "vanilla-animated-groceries",
+  "name": "movies-website",
   "version": "1.0.0",
-  "description": "A groceries list develop using angular, node/express, and mongodb",
+  "description": "An e-commercial movies website develop with angular, node/express, and mysql",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
     "server": "nodemon server.js",
-    "client": "npm start --prefix groceries-list",
+    "client": "npm start --prefix movies-website-client",
     "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/henrykhoanguyen/vanilla-animated-groceries.git"
+    "url": "git+https://github.com/henrykhoanguyen/movies-website.git"
   },
   "author": "Khoa Nguyen",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/henrykhoanguyen/vanilla-animated-groceries/issues"
+    "url": "https://github.com/henrykhoanguyen/movies-website/issues"
   },
-  "homepage": "https://github.com/henrykhoanguyen/vanilla-animated-groceries#readme",
+  "homepage": "https://github.com/henrykhoanguyen/movies-website#readme",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
