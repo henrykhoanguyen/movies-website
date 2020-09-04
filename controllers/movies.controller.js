@@ -1,3 +1,4 @@
+const ErrorResponse = require("../utils/errorResponse");
 const db = require('../config/db');
 const Movies = require('../model/Movies');
 const Stars = require('../model/Stars');
@@ -24,11 +25,7 @@ exports.getMovies = async (req, res, next) => {
   // console.log(movies);
 
   if (!movies || movies.length === 0) {
-    res.status(404).json({
-      success: false,
-      message: "No record was found..."
-    });
-    return;
+    return next(new ErrorResponse("No record was found...", "NoRecord", 404));
   }
 
   res.status(200).json({
@@ -61,11 +58,7 @@ exports.getMovieById = async (req, res, next) => {
   movie.dataValues.stars = stars;
 
   if (!movie || movie === []) {
-    res.status(404).json({
-      success: false,
-      message: "No record was found..."
-    });
-    return;
+    return next(new ErrorResponse("No record was found...", "NoRecord", 404));
   }
 
   res.status(200).json({
@@ -86,23 +79,25 @@ exports.search = async (req, res, next) => {
   if (req.query.starName){
     // SEARCH MOVIES BY STAR'S NAME
     // Setting query condition
-    condition.name = { [Op.like]: `%${req.query.starName}%` };
+    // condition.name = { [Op.like]: `%${req.query.starName}%` };
 
-    // TODO: return movies with the searched star name, currently only return searched stars with movie associate to them
     // Get stars with search name from database
-    var movies = await Stars.findAll({ 
-      where: condition,
+    movies = await Movies.findAll({ 
+      where: {
+        '$stars_in_movies.star.name$': { [Op.like]: `%${req.query.starName}%` }
+      },
       include: [{
+        attributes: [],
         model: StarsInMovies,
         include: [{
-          model: Movies
-        }],
-        require: false
+          model: Stars
+        }]
       }],
-      require: false,
-      order: ['name']
+      order: ['title']
     });
-    // movies = await getStars(movies);
+
+    // console.log(movies)
+    movies = await getStars(movies);
 
   } else {
     // SEARCH MOVIES BY TITLE, YEAR, DIRECTOR
@@ -125,11 +120,7 @@ exports.search = async (req, res, next) => {
   }
 
   if (!movies || movies.length === 0) {
-    res.status(404).json({
-      success: false,
-      message: "No record was found..."
-    });
-    return;
+    return next(new ErrorResponse("No record was found...", "NoRecord", 404));
   }
   
   res.status(200).json({

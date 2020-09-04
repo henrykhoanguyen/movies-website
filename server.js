@@ -3,6 +3,7 @@ const dotenv = require("dotenv");
 const path = require("path");
 const colors = require("colors");
 const connectDB = require("./config/db");
+const errorHandler = require("./middleware/error");
 const bodyParser = require("body-parser");
 
 // Load env vars
@@ -26,6 +27,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/api/v1/movies', movies);
 
 connectDB.sync();
+
+app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
 
