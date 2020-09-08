@@ -16,6 +16,7 @@ connectDB.authenticate()
 
 // Route files
 const movies = require('./routes/movies.route');
+const auth = require('./routes/auth.route')
 
 const app = express();
 
@@ -25,6 +26,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use('/api/v1/movies', movies);
+app.use('/api/v1/auth', auth);
 
 connectDB.sync();
 

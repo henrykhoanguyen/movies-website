@@ -45,16 +45,6 @@ exports.getMovieById = async (req, res, next) => {
 
   const movieId = movie.dataValues.id;
 
-  // const stars = await StarsInMovies.findAll({
-  //   where: { 
-  //     movieId: movieId
-  //   },
-  //   include: [{
-  //     model: Stars
-  //   }],
-  //   required: false
-  // });
-
   const stars = await Stars.findAll({
     include: [{
       attributes: [],

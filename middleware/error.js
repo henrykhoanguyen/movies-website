@@ -12,6 +12,16 @@ const errorHandler = (err, req, res, next) => {
     error = new ErrorResponse(message, err.name, 404);
   }
 
+  if (err.name === "NoCredential") {
+    const message = err.message;
+    error = new ErrorResponse(message, err.name, 400);
+  }
+
+  if (err.name === "InvalidCredential") {
+    const message = err.message;
+    error = new ErrorResponse(message, err.name, 401);
+  }
+
   res.status(error.statusCode || 500).json({
     success: false,
     error: error.message || "Server Error"
