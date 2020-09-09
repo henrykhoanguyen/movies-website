@@ -55,7 +55,33 @@ exports.login = async(req, res, next) => {
   .status(200)
   .cookie("token", token, options)
   .json({
+    success: true
+  });
+};
+
+
+// @desc    Logout user
+// @route   GET /api/v1/auth/logout
+// @access  Public
+exports.logout = async(req, res, next) => {
+  res.cookie('token', 'none', {
+    expires: new Date(Date.now() + 10 * 1000),
+    httpOnly: true
+  });
+
+  res.status(200).json({
     success: true,
-    token
+    data: {}
+  });
+};
+
+// @desc    Get current logged in user
+// @route   POST /api/v1/auth/me
+// @access  Private
+exports.getMe = async(req, res, next) => {
+  // console.log(req.user.id);
+  res.status(200).json({
+    success: true,
+    data: req.user
   });
 };

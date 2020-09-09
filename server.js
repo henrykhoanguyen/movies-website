@@ -5,7 +5,7 @@ const colors = require("colors");
 const connectDB = require("./config/db");
 const errorHandler = require("./middleware/error");
 const bodyParser = require("body-parser");
-
+const cookieParser = require("cookie-parser");
 // Load env vars
 dotenv.config({ path: "./config/config.env" });
 
@@ -24,6 +24,7 @@ const app = express();
 app.use(bodyParser.json());
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cookieParser());
 
 app.use('/api/v1/movies', movies);
 app.use('/api/v1/auth', auth);

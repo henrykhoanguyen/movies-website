@@ -22,6 +22,11 @@ const errorHandler = (err, req, res, next) => {
     error = new ErrorResponse(message, err.name, 401);
   }
 
+  if (err.name === "Unauthorized") {
+    const message = err.message;
+    error = new ErrorResponse(message, err.name, 401);
+  }
+
   res.status(error.statusCode || 500).json({
     success: false,
     error: error.message || "Server Error"
