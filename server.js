@@ -6,6 +6,7 @@ const connectDB = require("./config/db");
 const errorHandler = require("./middleware/error");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
+const cors = require("cors");
 // Load env vars
 dotenv.config({ path: "./config/config.env" });
 
@@ -25,6 +26,7 @@ app.use(bodyParser.json());
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
+app.use(cors());
 
 app.use('/api/v1/movies', movies);
 app.use('/api/v1/auth', auth);

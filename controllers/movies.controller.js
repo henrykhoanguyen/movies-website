@@ -16,8 +16,10 @@ StarsInMovies.belongsTo(Stars, { foreignKey: 'starId' });
 // @access  Public
 exports.getMovies = async (req, res, next) => {
 
+  const limit = parseInt(req.query.limit) || 100;
+
   // Get movies from database
-  var movies = await Movies.findAll({ limit: 10 });
+  var movies = await Movies.findAll({ limit: limit });
 
   // Get stars from movies
   movies = await getStars(movies);
@@ -27,6 +29,25 @@ exports.getMovies = async (req, res, next) => {
   if (!movies || movies.length === 0) {
     return next(new ErrorResponse("No record was found...", "NoRecord", 404));
   }
+
+  // Pagination
+  // const currPage = parseInt(req.query.page, 10) || 1;
+  // const itemPerPage = parseInt(req.query.perPage, 10) || 30;
+  // const startIndex = (currPage - 1) * itemPerPage;
+  // const endIndex = currPage * itemPerPage;
+
+  // const pagination = {}
+
+  // if (endIndex < movies.length){
+  //   pagination.next = currPage + 1;
+  // }
+
+  // if (startIndex > 0){
+  //   pagination.prev = currPage - 1;
+  // }
+
+  // pagination.startIndex = startIndex;
+  // pagination.endIndex = endIndex;
 
   res.status(200).json({
     success: true,
