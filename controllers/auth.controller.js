@@ -55,7 +55,8 @@ exports.login = async(req, res, next) => {
   .status(200)
   .cookie("token", token, options)
   .json({
-    success: true
+    success: true,
+    token
   });
 };
 

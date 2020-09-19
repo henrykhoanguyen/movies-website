@@ -13,9 +13,9 @@ export class MoviesService {
 
   private sendGetRequest(endpoint: string): Promise<any> {
     console.log(environment.expressBaseUrl + endpoint);
-    this.http.get(environment.expressBaseUrl + endpoint).subscribe(res => {
-      console.log(res);
-    });
+    // this.http.get(environment.expressBaseUrl + endpoint).subscribe(res => {
+    //   console.log(res);
+    // });
 
     return Promise.resolve(
       this.http.get(environment.expressBaseUrl + endpoint).toPromise()
@@ -23,17 +23,15 @@ export class MoviesService {
   }
 
   private sendPostRequest(endpoint: string, body): Promise<any> {
-    this.http.post(environment.expressBaseUrl + endpoint, body).subscribe(res => {});
+    console.log(environment.expressBaseUrl + endpoint);
+
+    // this.http.post(environment.expressBaseUrl + endpoint, body).subscribe(res => {
+    //   // console.log(res);
+    // });
 
     return Promise.resolve(
       this.http.post(environment.expressBaseUrl + endpoint, body).toPromise()
     );
-  }
-
-  async logIn(): Promise<any> {
-    await this.sendPostRequest("/login", { emai: "a@email.com", password: "a1"}).then(data => {
-      console.log(data);
-    });
   }
 
   async getRecentMovies(query: string) {

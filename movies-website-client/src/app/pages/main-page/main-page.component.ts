@@ -6,7 +6,7 @@ import { MoviesService } from '../../services/movies.service';
   styleUrls: ['./main-page.component.scss']
 })
 export class MainPageComponent implements OnInit {
-  movieData;
+  movieData = null;
   pagination;
 
   constructor(private moviesService: MoviesService) {

@@ -1,0 +1,297 @@
+<div class="fh5co-loader"></div>
+
+<div id="page">
+  <nav class="fh5co-nav" role="navigation">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-2 text-left">
+          <div id="fh5co-logo">
+            <a href="/">Koality<span>.</span></a>
+          </div>
+        </div>
+        <!-- <div class="col-xs-10 text-right menu-1">
+					<ul>
+						<li><a href="index.html">Home</a></li>
+						<li class="has-dropdown">
+							<a href="services.html">Services</a>
+							<ul class="dropdown">
+								<li><a href="#">Web Design</a></li>
+								<li><a href="#">eCommerce</a></li>
+								<li><a href="#">Branding</a></li>
+								<li><a href="#">API</a></li>
+							</ul>
+						</li>
+
+						<li><a href="products.html">Products</a></li>
+						<li><a href="about.html">About</a></li>
+						<li><a href="blog.html">Blog</a></li>
+						<li class="active"><a href="contact.html">Contact</a></li>
+					</ul>
+				</div> -->
+      </div>
+    </div>
+  </nav>
+
+  <header
+    id="fh5co-header"
+    class="fh5co-cover fh5co-cover-sm"
+    role="banner"
+    style="
+      background-image: url(../../../assets/images/krists-luhaers-theater.jpg);
+      background-position: left;
+    "
+    data-stellar-background-ratio="0.5"
+  >
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <!-- <div class="col-md-4 col-md-push-1 text-left">
+					<div class="display-t">
+						<div class="display-tc animate-box" data-animate-effect="fadeInUp">
+							<h1 class="mb30">Login</h1>
+						</div>
+					</div>
+        </div> -->
+        <!-- <div class="col-md-4 col-md-push-1 animate-box">
+					<div class="display-t">
+						<div class="display-tc animate-box" data-animate-effect="fadeInUp">
+              <div class="fh5co-contact-info">
+                <h3>Contact Information</h3>
+                <ul>
+                  <li class="address">Irvine, CA</li>
+                  <li class="email"><a href="mailto:henrykhoanguyen@gmail.com">henrykhoanguyen@gmail.com</a></li>
+                  <li class="url"><a href="http://henrykhoanguyen.com">henrykhoanguyen.com</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div> -->
+
+        <div class="col-md-7 animate-box">
+          <div class="display-t">
+            <div class="display-tc animate-box" data-animate-effect="fadeInUp">
+              <form
+                #userLogin="ngForm"
+                (ngSubmit)="login(userLogin.value)"
+                style="background-color: white; border-radius: 2%; padding: 2em"
+              >
+                <h1 class="mb25" style="color: black">Login</h1>
+                <div class="row form-group">
+                  <div class="col-md-12">
+                    <label for="email">Email</label>
+                    <input
+                      type="text"
+                      name="email"
+                      class="form-control"
+                      placeholder="Your email address"
+                      [(ngModel)]="email"
+                      #userEmail="ngModel"
+                      required
+                    />
+                    <div
+                      *ngIf="
+                        userEmail.invalid &&
+                        (userEmail.dirty || userEmail.touched)
+                      "
+                      class="alert alert-danger"
+                    >
+                      <div *ngIf="userEmail.errors.required">
+                        Email is required...
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row form-group">
+                  <div class="col-md-12">
+                    <label for="password">Password</label>
+                    <input
+                      type="password"
+                      name="password"
+                      class="form-control"
+                      placeholder="Your password"
+                      [(ngModel)]="password"
+                      #userPass="ngModel"
+                      required
+                    />
+                    <div
+                      *ngIf="
+                        userPass.invalid && (userPass.dirty || userPass.touched)
+                      "
+                      class="alert alert-danger"
+                    >
+                      <div *ngIf="userPass.errors.required">
+                        Password is required...
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <input
+                    type="submit"
+                    value="Login"
+                    class="btn btn-lg btn-primary"
+                  />
+                  <div *ngIf="error" class="alert alert-danger">
+                    {{ error }}
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- <div id="fh5co-contact">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-5 col-md-push-1 animate-box">
+
+					<div class="fh5co-contact-info">
+						<h3>Contact Information</h3>
+						<ul>
+							<li class="address">Irvine, CA</li>
+							<li class="phone"><a href="tel://1234567920">+ 1235 2355 98</a></li>
+							<li class="email"><a href="mailto:henrykhoanguyen@gmail.com">henrykhoanguyen@gmail.com</a></li>
+							<li class="url"><a href="http://henrykhoanguyen.com">henrykhoanguyen.com</a></li>
+						</ul>
+					</div>
+
+				</div>
+				<div class="col-md-6 animate-box">
+
+					<form action="#">
+
+						<div class="row form-group">
+							<div class="col-md-12">
+								<label for="email">Email</label>
+								<input type="text" id="email" class="form-control" placeholder="Your email address">
+							</div>
+            </div>
+
+            <div class="row form-group">
+							<div class="col-md-12">
+								<label for="password">Password</label>
+								<input type="text" id="password" class="form-control" placeholder="Your password">
+							</div>
+						</div>
+
+						<div class="form-group">
+							<input type="submit" value="Login" class="btn btn-lg btn-primary">
+						</div>
+
+					</form>
+				</div>
+			</div>
+
+		</div>
+	</div> -->
+
+  <!-- <div id="fh5co-started">
+		<div class="container">
+			<div class="row animate-box">
+				<div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
+					<span>Let's work together</span>
+					<h2>Try this template for free</h2>
+					<p>Dignissimos asperiores vitae velit veniam totam fuga molestias accusamus alias autem provident. Odit ab aliquam dolor eius.</p>
+					<p><button type="submit" class="btn btn-default">Get In Touch</button></p>
+				</div>
+			</div>
+		</div>
+	</div> -->
+
+  <footer id="fh5co-footer" role="contentinfo">
+    <div class="container">
+      <div class="row row-pb-md">
+        <div class="col-md-4 fh5co-widget">
+          <h3>Koality.</h3>
+          <p>
+            Disclaimer: This is a personal project developed by
+            <a target="_blank" href="https://henrykhoanguyen.com"
+              >Khoa Nguyen</a
+            >
+            for fun and learning purposes. Please do not attempt to buy or put
+            in any sensitive information about you on this website.
+          </p>
+          <p><a href="#">Learn More</a></p>
+        </div>
+        <div class="col-md-2 col-sm-4 col-xs-6 col-md-push-1">
+          <ul class="fh5co-footer-links">
+            <li><a href="#">About</a></li>
+            <li><a href="#">Help</a></li>
+            <li><a href="#">Contact</a></li>
+            <li><a href="#">Terms</a></li>
+            <li><a href="#">Meetups</a></li>
+          </ul>
+        </div>
+
+        <div class="col-md-2 col-sm-4 col-xs-6 col-md-push-1">
+          <ul class="fh5co-footer-links">
+            <li><a href="#">Shop</a></li>
+            <li><a href="#">Privacy</a></li>
+            <li><a href="#">Testimonials</a></li>
+            <li><a href="#">Handbook</a></li>
+            <li><a href="#">Held Desk</a></li>
+          </ul>
+        </div>
+
+        <div class="col-md-2 col-sm-4 col-xs-6 col-md-push-1">
+          <ul class="fh5co-footer-links">
+            <li><a href="#">Find Designers</a></li>
+            <li><a href="#">Find Developers</a></li>
+            <li><a href="#">Teams</a></li>
+            <li><a href="#">Advertise</a></li>
+            <li><a href="#">API</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="row copyright">
+        <div class="col-md-12 text-center">
+          <p>
+            <small class="block">&copy; 2021 All Rights Reserved.</small>
+            <small class="block"
+              >Designed by
+              <a href="https://henrykhoanguyen.com" target="_blank"
+                >Khoa Nguyen</a
+              >
+              Demo Images:
+              <a href="http://unsplash.com/" target="_blank">Unsplash</a></small
+            >
+          </p>
+          <div>
+            <ul class="fh5co-social-icons">
+              <li>
+                <a href="https://henrykhoanguyen.com"
+                  ><i class="icon-globe"></i
+                ></a>
+              </li>
+              <li>
+                <a href="mailto:henrykhoanguyen@gmail.com"
+                  ><i class="icon-mail"></i
+                ></a>
+              </li>
+              <li>
+                <a href="https://www.linkedin.com/in/henrykhoanguyen/"
+                  ><i class="icon-linkedin"></i
+                ></a>
+              </li>
+              <li>
+                <a href="https://github.com/henrykhoanguyen"
+                  ><i class="icon-github"></i
+                ></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<div class="gototop js-top">
+  <a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>
+</div>

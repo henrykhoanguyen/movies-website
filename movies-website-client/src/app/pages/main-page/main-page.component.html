@@ -1,16 +1,18 @@
 <div class="fh5co-loader"></div>
 
-	<div id="page">
-	<nav class="fh5co-nav" role="navigation">
-		<div class="container">
-			<div class="row">
-				<div class="col-xs-2 text-left">
-					<div id="fh5co-logo"><a href="/">Koality<span>.</span></a></div>
-				</div>
-				<div class="col-xs-10 text-right menu-1">
-					<ul>
-						<li><a href="#">Login</a></li>
-						<!-- <li class="has-dropdown">
+<div id="page">
+  <nav class="fh5co-nav" role="navigation">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-2 text-left">
+          <div id="fh5co-logo">
+            <a href="/">Koality<span>.</span></a>
+          </div>
+        </div>
+        <div class="col-xs-10 text-right menu-1">
+          <ul>
+            <li><a href="/login">Login</a></li>
+            <!-- <li class="has-dropdown">
 							<a href="services.html">Services</a>
 							<ul class="dropdown">
 								<li><a href="#">Web Design</a></li>
@@ -24,56 +26,77 @@
 						<li><a href="about.html">About</a></li>
 						<li><a href="blog.html">Blog</a></li>
 						<li><a href="contact.html">Contact</a></li> -->
-					</ul>
-				</div>
-			</div>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </nav>
 
-		</div>
-	</nav>
-
-	<header id="fh5co-header" class="fh5co-cover" role="banner" style="background-image:url(../../../assets/images/krists-luhaers-theater.jpg); background-position: left;" data-stellar-background-ratio="0.5">
-		<div class="overlay"></div>
-		<div class="container">
-			<div class="row">
-				<div class="col-md-7 text-left">
-					<div class="display-t">
-						<div class="display-tc animate-box" data-animate-effect="fadeInUp">
-							<h1 class="mb30">Let us enjoy a Koality time together...</h1>
-							<p>
-								<a href="#" class="btn btn-primary">Get Started</a>  <em class="or">or</em>
-								<a href="https://vimeo.com/channels/staffpicks/93951774" class="link-watch popup-vimeo">Watch Video</a>
-							</p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</header>
-
-	<div id="fh5co-project">
-		<div class="container">
-			<div class="row row-pb-md">
-				<div class="col-md-8 col-md-offset-2 text-left fh5co-heading animate-box">
-					<span>Watch Some Cool Stuff</span>
-					<h2>Most Popular Movies</h2>
-					<p>These are some of our most popular movies on our site.</p>
-				</div>
-			</div>
-
-			<div class="row" *ngIf="movieData">
-          <div *ngFor="let movie of movieData" class="col-md-4 col-sm-6 fh5co-project" data-animate-effect="fadeIn">
-            <a href="#">
-              <img src="../../../assets/images/movie-2.jpg" alt="random movie poster" class="img-responsive">
-              <div class="fh5co-copy">
-                <h3>{{movie.title}}</h3>
-                <p>
-                  {{movie.director}} &mdash; {{movie.year}}
-                </p>
-              </div>
-            </a>
+  <header
+    id="fh5co-header"
+    class="fh5co-cover"
+    role="banner"
+    style="
+      background-image: url(../../../assets/images/krists-luhaers-theater.jpg);
+      background-position: left;
+    "
+    data-stellar-background-ratio="0.5"
+  >
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-7 text-left">
+          <div class="display-t">
+            <div class="display-tc animate-box" data-animate-effect="fadeInUp">
+              <h1 class="mb30">Let us enjoy a Koality time together...</h1>
+              <p>
+                <a href="/login" class="btn btn-primary">Get Started</a>
+                <em class="or">or</em>
+                <a
+                  href="https://vimeo.com/channels/staffpicks/93951774"
+                  class="link-watch popup-vimeo"
+                  >Watch Video</a
+                >
+              </p>
+            </div>
           </div>
+        </div>
+      </div>
+    </div>
+  </header>
 
-				<!-- <div class="col-md-4 col-sm-6 fh5co-project animate-box" data-animate-effect="fadeIn">
+  <div id="fh5co-project">
+    <div class="container">
+      <div class="row row-pb-md">
+        <div
+          class="col-md-8 col-md-offset-2 text-left fh5co-heading animate-box"
+        >
+          <span>Watch Some Cool Stuff</span>
+          <h2>Most Popular Movies</h2>
+          <p>These are some of our most popular movies on our site.</p>
+        </div>
+      </div>
+
+      <div class="row" *ngIf="movieData">
+        <div
+          *ngFor="let movie of movieData"
+          class="col-md-4 col-sm-6 fh5co-project"
+          data-animate-effect="fadeIn"
+        >
+          <a href="#">
+            <img
+              src="../../../assets/images/movie-2.jpg"
+              alt="random movie poster"
+              class="img-responsive"
+            />
+            <div class="fh5co-copy">
+              <h3>{{ movie.title }}</h3>
+              <p>{{ movie.director }} &mdash; {{ movie.year }}</p>
+            </div>
+          </a>
+        </div>
+
+        <!-- <div class="col-md-4 col-sm-6 fh5co-project animate-box" data-animate-effect="fadeIn">
 					<a href="#"><img src="../../../assets/images/movie-2.jpg" alt="random movie poster" class="img-responsive">
 						<div class="fh5co-copy">
 							<h3>Movie Title</h3>
@@ -89,16 +112,15 @@
 						</div>
 					</a>
 				</div> -->
+      </div>
+    </div>
 
-			</div>
-		</div>
-
-    <div class="col-md-12 text-center">
+    <!-- <div class="col-md-12 text-center">
       <nav aria-label="Page navigation">
         <ul class="pagination">
           <li>
             <a href="#" aria-label="Previous">
-              <span aria-hidden="true">&laquo;</span>
+              <span arial-hidden="true">&laquo;</span>
             </a>
           </li>
           <li class="active"><a href="#">1</a></li>
@@ -111,11 +133,10 @@
           </li>
         </ul>
       </nav>
-    </div>
-	</div>
+    </div> -->
+  </div>
 
-
-	<!-- <div id="fh5co-services" class="fh5co-bg-section border-bottom">
+  <!-- <div id="fh5co-services" class="fh5co-bg-section border-bottom">
 		<div class="container">
 			<div class="row row-pb-md">
 				<div class="col-md-8 col-md-offset-2 text-left animate-box" data-animate-effect="fadeInUp">
@@ -200,113 +221,199 @@
 	</div> -->
 
   <!-- Happy Clients' Testimonial -->
-	<div id="fh5co-testimonial" class="fh5co-bg-section">
-		<div class="container">
-			<div class="row animate-box row-pb-md">
-				<div class="col-md-8 col-md-offset-2 text-left fh5co-heading">
-					<span>You deserved happiness</span>
-					<h2>Happy Clients</h2>
-					<p>Find it hard to believe that our service can satisfy you? Here are testimonials from some of our happiest clients...</p>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-6 animate-box">
-					<div class="testimonial">
-						<blockquote>
-							<p>&ldquo;After any good golf trip, I like to enjoy a good daily dose of movies while siping on covfefe. The FAKE NEWS media will say this site sucks! SAD! They don't know how to enjoy themseve. America deserves KOALITY time!!! #MAKA &rdquo;</p>
-							<p class="author"> <img src="../../../assets/images/donaldrump.png" alt="Donal Drump Image"> <cite>&mdash; Donal Drump</cite></p>
-						</blockquote>
-					</div>
+  <div id="fh5co-testimonial" class="fh5co-bg-section">
+    <div class="container">
+      <div class="row animate-box row-pb-md">
+        <div class="col-md-8 col-md-offset-2 text-left fh5co-heading">
+          <span>You deserved happiness</span>
+          <h2>Happy Clients</h2>
+          <p>
+            Find it hard to believe that our service can satisfy you? Here are
+            testimonials from some of our happiest clients...
+          </p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 animate-box">
+          <div class="testimonial">
+            <blockquote>
+              <p>
+                &ldquo;After any good golf trip, I like to enjoy a good daily
+                dose of movies while siping on covfefe. The FAKE NEWS media will
+                say this site sucks! SAD! They don't know how to enjoy themseve.
+                America deserves KOALITY time!!! #MAKA &rdquo;
+              </p>
+              <p class="author">
+                <img
+                  src="../../../assets/images/donaldrump.png"
+                  alt="Donal Drump Image"
+                />
+                <cite>&mdash; Donal Drump</cite>
+              </p>
+            </blockquote>
+          </div>
 
-					<div class="testimonial fh5co-selected">
-						<blockquote>
-							<p>&ldquo;I was the first to own a sensory deprivation tank. But ALSO the first to join this incredible site to watch movies with my family. I have a bit about it in my special! Do you know about Dimethyltryptamine? It goes great with any movies on here. &rdquo;</p>
-							<p class="author"><img src="../../../assets/images/joeRogan.jpeg" alt="Joe Rogan Image"> <cite>&mdash; Joe &ldquo;pull that up Jamie&rdquo; Rogan</cite></p>
-						</blockquote>
-					</div>
-				</div>
+          <div class="testimonial fh5co-selected">
+            <blockquote>
+              <p>
+                &ldquo;I was the first to own a sensory deprivation tank. But
+                ALSO the first to join this incredible site to watch movies with
+                my family. I have a bit about it in my special! Do you know
+                about Dimethyltryptamine? It goes great with any movies on here.
+                &rdquo;
+              </p>
+              <p class="author">
+                <img
+                  src="../../../assets/images/joeRogan.jpeg"
+                  alt="Joe Rogan Image"
+                />
+                <cite>&mdash; Joe &ldquo;pull that up Jamie&rdquo; Rogan</cite>
+              </p>
+            </blockquote>
+          </div>
+        </div>
 
-				<div class="col-md-6 animate-box">
-					<div class="testimonial fh5co-selected">
-						<blockquote>
-							<p>&ldquo;I am family man. I love my wife Michelle. I love my kids. And I love a Koality time with my family....I said nice thing about you, Michelle. Can I have my phone back now?&rdquo;</p>
-							<p class="author"><img src="../../../assets/images/obama.jpg" alt="Barock Obama Image"> <cite>&mdash; Barock Obama</cite></p>
-						</blockquote>
-					</div>
+        <div class="col-md-6 animate-box">
+          <div class="testimonial fh5co-selected">
+            <blockquote>
+              <p>
+                &ldquo;I am family man. I love my wife Michelle. I love my kids.
+                And I love a Koality time with my family....I said nice thing
+                about you, Michelle. Can I have my phone back now?&rdquo;
+              </p>
+              <p class="author">
+                <img
+                  src="../../../assets/images/obama.jpg"
+                  alt="Barock Obama Image"
+                />
+                <cite>&mdash; Barock Obama</cite>
+              </p>
+            </blockquote>
+          </div>
 
-					<div class="testimonial">
-						<blockquote>
-							<p>&ldquo;Aw man...They don't have "Nuktuk: Hero of the South" on here. Honestly, I can't confirm nor deny that Koality is a good movies site. But I do have a great time on here! :D&rdquo;</p>
-							<p class="author"><img src="../../../assets/images/Bolin.png" alt="Bolin Image"> <cite>&mdash; Bolin</cite></p>
-						</blockquote>
-					</div>
-
-				</div>
-
-
-
-			</div>
-		</div>
-	</div>
+          <div class="testimonial">
+            <blockquote>
+              <p>
+                &ldquo;Aw man...They don't have "Nuktuk: Hero of the South" on
+                here. Honestly, I can't confirm nor deny that Koality is a good
+                movies site. But I do have a great time on here! :D&rdquo;
+              </p>
+              <p class="author">
+                <img src="../../../assets/images/Bolin.png" alt="Bolin Image" />
+                <cite>&mdash; Bolin</cite>
+              </p>
+            </blockquote>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- Fun Fact About Company -->
-	<div id="fh5co-counter">
-		<div class="container">
+  <div id="fh5co-counter">
+    <div class="container">
+      <div class="row animate-box" data-animate-effect="fadeInUp">
+        <div class="col-md-8 col-md-offset-2 text-left fh5co-heading">
+          <span>Enjoy it</span>
+          <h2>Fun Facts</h2>
+          <p>
+            We have happy users all around the world. With millions of hour
+            streamed and downloaded. Some might be bots but definitely a happy
+            bot that like a Koality time...we think.
+          </p>
+        </div>
+      </div>
 
-			<div class="row animate-box" data-animate-effect="fadeInUp">
-				<div class="col-md-8 col-md-offset-2 text-left fh5co-heading">
-					<span>Enjoy it</span>
-					<h2>Fun Facts</h2>
-					<p>We have happy users all around the world. With millions of hour streamed and downloaded. Some might be bots but definitely a happy bot that like a Koality time...we think.</p>
-				</div>
-			</div>
+      <div class="row">
+        <div
+          class="col-md-3 col-sm-6 animate-box"
+          data-animate-effect="fadeInLeft"
+        >
+          <div class="feature-center">
+            <span class="icon">
+              <i class="ti-download"></i>
+            </span>
+            <span class="counter"
+              ><span
+                class="js-counter"
+                data-from="0"
+                data-to="15"
+                data-speed="1500"
+                data-refresh-interval="50"
+                >1</span
+              >M+</span
+            >
+            <span class="counter-label">Downloads</span>
+          </div>
+        </div>
+        <div
+          class="col-md-3 col-sm-6 animate-box"
+          data-animate-effect="fadeInLeft"
+        >
+          <div class="feature-center">
+            <span class="icon">
+              <i class="ti-face-smile"></i>
+            </span>
+            <span class="counter"
+              ><span
+                class="js-counter"
+                data-from="0"
+                data-to="400"
+                data-speed="1500"
+                data-refresh-interval="50"
+                >1</span
+              >+</span
+            >
+            <span class="counter-label">Happy Clients</span>
+          </div>
+        </div>
+        <div
+          class="col-md-3 col-sm-6 animate-box"
+          data-animate-effect="fadeInLeft"
+        >
+          <div class="feature-center">
+            <span class="icon">
+              <i class="ti-briefcase"></i>
+            </span>
+            <span class="counter"
+              ><span
+                class="js-counter"
+                data-from="0"
+                data-to="9"
+                data-speed="1500"
+                data-refresh-interval="50"
+                >1</span
+              >K+</span
+            >
+            <span class="counter-label">Movies</span>
+          </div>
+        </div>
+        <div
+          class="col-md-3 col-sm-6 animate-box"
+          data-animate-effect="fadeInLeft"
+        >
+          <div class="feature-center">
+            <span class="icon">
+              <i class="ti-time"></i>
+            </span>
+            <span class="counter"
+              ><span
+                class="js-counter"
+                data-from="0"
+                data-to="12"
+                data-speed="1500"
+                data-refresh-interval="50"
+                >1</span
+              >M+</span
+            >
+            <span class="counter-label">Hours Spent</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-			<div class="row">
-
-				<div class="col-md-3 col-sm-6 animate-box" data-animate-effect="fadeInLeft">
-					<div class="feature-center">
-						<span class="icon">
-							<i class="ti-download"></i>
-						</span>
-						<span class="counter"><span class="js-counter" data-from="0" data-to="15" data-speed="1500" data-refresh-interval="50">1</span>M+</span>
-						<span class="counter-label">Downloads</span>
-
-					</div>
-				</div>
-				<div class="col-md-3 col-sm-6 animate-box" data-animate-effect="fadeInLeft">
-					<div class="feature-center">
-							<span class="icon">
-								<i class="ti-face-smile"></i>
-							</span>
-							<span class="counter"><span class="js-counter" data-from="0" data-to="400" data-speed="1500" data-refresh-interval="50">1</span>+</span>
-							<span class="counter-label">Happy Clients</span>
-						</div>
-					</div>
-					<div class="col-md-3 col-sm-6 animate-box" data-animate-effect="fadeInLeft">
-						<div class="feature-center">
-							<span class="icon">
-								<i class="ti-briefcase"></i>
-							</span>
-							<span class="counter"><span class=" js-counter" data-from="0" data-to="9" data-speed="1500" data-refresh-interval="50">1</span>K+</span>
-							<span class="counter-label">Movies</span>
-						</div>
-					</div>
-					<div class="col-md-3 col-sm-6 animate-box" data-animate-effect="fadeInLeft">
-						<div class="feature-center">
-							<span class="icon">
-								<i class="ti-time"></i>
-							</span>
-							<span class="counter"><span class="js-counter" data-from="0" data-to="12" data-speed="1500" data-refresh-interval="50">1</span>M+</span>
-							<span class="counter-label">Hours Spent</span>
-
-						</div>
-					</div>
-
-				</div>
-			</div>
-	</div>
-
-	<!-- <div id="fh5co-blog" class="fh5co-bg-section">
+  <!-- <div id="fh5co-blog" class="fh5co-bg-section">
 		<div class="container">
 			<div class="row animate-box row-pb-md" data-animate-effect="fadeInUp">
 				<div class="col-md-8 col-md-offset-2 text-left fh5co-heading">
@@ -344,79 +451,113 @@
 		</div>
 	</div> -->
 
-	<div id="fh5co-started">
-		<div class="container">
-			<div class="row animate-box">
-				<div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
-					<span>There are many adventures await ahead!</span>
-					<h2>Let's watch some movies</h2>
-					<p>What are you waiting for? Login with your account and start watching movies today. Give us your time and <strong>moneyyyy</strong>!!!</p>
-					<p><button type="submit" class="btn btn-primary">Get Started</button></p>
-				</div>
-			</div>
-		</div>
-	</div>
+  <div id="fh5co-started">
+    <div class="container">
+      <div class="row animate-box">
+        <div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
+          <span>There are many adventures await ahead!</span>
+          <h2>Let's watch some movies</h2>
+          <p>
+            What are you waiting for? Login with your account and start watching
+            movies today. Give us your time and <strong>moneyyyy</strong>!!!
+          </p>
+          <p>
+            <button type="submit" class="btn btn-primary">Get Started</button>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
 
-	<footer id="fh5co-footer" role="contentinfo">
-		<div class="container">
-			<div class="row row-pb-md">
-				<div class="col-md-4 fh5co-widget ">
-					<h3>Koality.</h3>
-					<p>Disclaimer: This is a personal project developed by <a target="_blank" href="https://henrykhoanguyen.com">Khoa Nguyen</a> for fun and learning purposes. Please do not attempt to buy or put in any sensitive information about you on this website.</p>
-					<p><a href="#">Learn More</a></p>
-				</div>
-				<div class="col-md-2 col-sm-4 col-xs-6 col-md-push-1 ">
-					<ul class="fh5co-footer-links">
-						<li><a href="#">About</a></li>
-						<li><a href="#">Help</a></li>
-						<li><a href="#">Contact</a></li>
-						<li><a href="#">Terms</a></li>
-						<li><a href="#">Meetups</a></li>
-					</ul>
-				</div>
+  <footer id="fh5co-footer" role="contentinfo">
+    <div class="container">
+      <div class="row row-pb-md">
+        <div class="col-md-4 fh5co-widget">
+          <h3>Koality.</h3>
+          <p>
+            Disclaimer: This is a personal project developed by
+            <a target="_blank" href="https://henrykhoanguyen.com"
+              >Khoa Nguyen</a
+            >
+            for fun and learning purposes. Please do not attempt to buy or put
+            in any sensitive information about you on this website.
+          </p>
+          <p><a href="#">Learn More</a></p>
+        </div>
+        <div class="col-md-2 col-sm-4 col-xs-6 col-md-push-1">
+          <ul class="fh5co-footer-links">
+            <li><a href="#">About</a></li>
+            <li><a href="#">Help</a></li>
+            <li><a href="#">Contact</a></li>
+            <li><a href="#">Terms</a></li>
+            <li><a href="#">Meetups</a></li>
+          </ul>
+        </div>
 
-				<div class="col-md-2 col-sm-4 col-xs-6 col-md-push-1 ">
-					<ul class="fh5co-footer-links">
-						<li><a href="#">Shop</a></li>
-						<li><a href="#">Privacy</a></li>
-						<li><a href="#">Testimonials</a></li>
-						<li><a href="#">Handbook</a></li>
-						<li><a href="#">Held Desk</a></li>
-					</ul>
-				</div>
+        <div class="col-md-2 col-sm-4 col-xs-6 col-md-push-1">
+          <ul class="fh5co-footer-links">
+            <li><a href="#">Shop</a></li>
+            <li><a href="#">Privacy</a></li>
+            <li><a href="#">Testimonials</a></li>
+            <li><a href="#">Handbook</a></li>
+            <li><a href="#">Held Desk</a></li>
+          </ul>
+        </div>
 
-				<div class="col-md-2 col-sm-4 col-xs-6 col-md-push-1 ">
-					<ul class="fh5co-footer-links">
-						<li><a href="#">Find Designers</a></li>
-						<li><a href="#">Find Developers</a></li>
-						<li><a href="#">Teams</a></li>
-						<li><a href="#">Advertise</a></li>
-						<li><a href="#">API</a></li>
-					</ul>
-				</div>
-			</div>
+        <div class="col-md-2 col-sm-4 col-xs-6 col-md-push-1">
+          <ul class="fh5co-footer-links">
+            <li><a href="#">Find Designers</a></li>
+            <li><a href="#">Find Developers</a></li>
+            <li><a href="#">Teams</a></li>
+            <li><a href="#">Advertise</a></li>
+            <li><a href="#">API</a></li>
+          </ul>
+        </div>
+      </div>
 
-			<div class="row copyright">
-				<div class="col-md-12 text-center">
-					<p>
-						<small class="block">&copy; 2021 All Rights Reserved.</small>
-						<small class="block">Designed by <a href="https://henrykhoanguyen.com" target="_blank">Khoa Nguyen</a> Demo Images: <a href="http://unsplash.com/" target="_blank">Unsplash</a></small>
-					</p>
-					<div>
-						<ul class="fh5co-social-icons">
-							<li><a href="#"><i class="icon-twitter"></i></a></li>
-							<li><a href="mailto:henrykhoanguyen@gmail.com"><i class="icon-mail"></i></a></li>
-							<li><a href="https://www.linkedin.com/in/henrykhoanguyen/"><i class="icon-linkedin"></i></a></li>
-							<li><a href="https://github.com/henrykhoanguyen"><i class="icon-github"></i></a></li>
-						</ul>
+      <div class="row copyright">
+        <div class="col-md-12 text-center">
+          <p>
+            <small class="block">&copy; 2021 All Rights Reserved.</small>
+            <small class="block"
+              >Designed by
+              <a href="https://henrykhoanguyen.com" target="_blank"
+                >Khoa Nguyen</a
+              >
+              Demo Images:
+              <a href="http://unsplash.com/" target="_blank">Unsplash</a></small
+            >
+          </p>
+          <div>
+            <ul class="fh5co-social-icons">
+              <li>
+                <a href="https://henrykhoanguyen.com"
+                  ><i class="icon-globe"></i
+                ></a>
+              </li>
+              <li>
+                <a href="mailto:henrykhoanguyen@gmail.com"
+                  ><i class="icon-mail"></i
+                ></a>
+              </li>
+              <li>
+                <a href="https://www.linkedin.com/in/henrykhoanguyen/"
+                  ><i class="icon-linkedin"></i
+                ></a>
+              </li>
+              <li>
+                <a href="https://github.com/henrykhoanguyen"
+                  ><i class="icon-github"></i
+                ></a>
+              </li>
+            </ul>
           </div>
-				</div>
-			</div>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>
 
-		</div>
-	</footer>
-	</div>
-
-	<div class="gototop js-top">
-		<a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>
-	</div>
+<div class="gototop js-top">
+  <a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>
+</div>
