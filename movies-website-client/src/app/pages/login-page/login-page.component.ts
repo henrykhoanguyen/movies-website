@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MoviesService } from "../../services/movies.service";
+import { AuthService } from "../../services/auth.service";
 
 @Component({
   selector: 'app-login-page',
@@ -11,7 +11,7 @@ export class LoginPageComponent implements OnInit {
   password;
   error;
 
-  constructor(private moviesService: MoviesService) { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit() {
   }
@@ -28,10 +28,16 @@ export class LoginPageComponent implements OnInit {
 
     // console.log("Login", this.email, this.password);
 
-    this.moviesService.logIn(this.email, this.password).then(data => {
-      console.log(data);
+    this.authService.logIn(this.email, this.password).then(data => {
+      // console.log(data);
+      if (!data.success) {
+        throw data.error;
+      } else {
+
+      }
     }).catch(err => {
       console.log(err);
+      this.error = err.error;
     });
   }
 }

@@ -1,6 +1,8 @@
-<div class="fh5co-loader"></div>
+<div class="fh5co-loader" *ngIf="!movieData"></div>
 
-<div id="page">
+<div id="page" *ngIf="movieData">
+
+  <!-- <h1>HELLO WORLD!</h1> -->
   <nav class="fh5co-nav" role="navigation">
     <div class="container">
       <div class="row">
