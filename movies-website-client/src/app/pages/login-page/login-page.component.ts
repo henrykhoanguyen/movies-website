@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from "../../services/auth.service";
 
 @Component({
@@ -11,9 +12,12 @@ export class LoginPageComponent implements OnInit {
   password;
   error;
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
+    if (sessionStorage.getItem("token")) {
+      this.router.navigate([this.authService.redirectUrl || "\index"]);
+    }
   }
 
   login(data) {
@@ -32,8 +36,6 @@ export class LoginPageComponent implements OnInit {
       // console.log(data);
       if (!data.success) {
         throw data.error;
-      } else {
-
       }
     }).catch(err => {
       console.log(err);

@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
   providedIn: "root",
 })
 export class AuthService {
-  isLoggedIn: Observable<boolean>;
+
   public redirectUrl: string;
 
   constructor(private http: HttpClient, private router: Router) {
@@ -31,11 +31,13 @@ export class AuthService {
     const body = { email, password };
     return await this.sendPostRequest("/auth/login", body)
       .then((data) => {
-        this.isLoggedIn = data.success;
-        console.log(data, this.redirectUrl, this.isLoggedIn);
 
-        if (this.redirectUrl) {
-          this.router.navigate([this.redirectUrl]);
+        console.log(data.token, this.redirectUrl);
+
+        sessionStorage.setItem("token", data.token);
+
+        if (data.success) {
+          this.router.navigate([this.redirectUrl || "\index"]);
           this.redirectUrl = null;
         }
         return data;
@@ -51,7 +53,19 @@ export class AuthService {
       .toPromise()
       .then(data => {
         console.log(data);
+        if (this.isLoggedIn()) {
+          sessionStorage.removeItem("token");
+        }
+        this.router.navigate(["/login"]);
         // this.isLoggedIn = data;
       });
+  }
+
+  isLoggedIn(): boolean {
+    if (sessionStorage.getItem("token")) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }

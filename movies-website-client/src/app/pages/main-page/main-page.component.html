@@ -1,6 +1,6 @@
 <div class="fh5co-loader" *ngIf="!movieData"></div>
 
-<div id="page" *ngIf="movieData">
+<div id="page">
 
   <!-- <h1>HELLO WORLD!</h1> -->
   <nav class="fh5co-nav" role="navigation">
@@ -13,7 +13,10 @@
         </div>
         <div class="col-xs-10 text-right menu-1">
           <ul>
-            <li><a href="/login">Login</a></li>
+            <li>
+              <a href="/login" *ngIf="!isLoggedIn">Login</a>
+              <a (click)="logout()" *ngIf="isLoggedIn" style="cursor:pointer;">Logout</a>
+            </li>
             <!-- <li class="has-dropdown">
 							<a href="services.html">Services</a>
 							<ul class="dropdown">
@@ -52,7 +55,8 @@
             <div class="display-tc animate-box" data-animate-effect="fadeInUp">
               <h1 class="mb30">Let us enjoy a Koality time together...</h1>
               <p>
-                <a href="/login" class="btn btn-primary">Get Started</a>
+                <a href="/login" class="btn btn-primary" *ngIf="!isLoggedIn">Get Started</a>
+                <a href="/browser" class="btn btn-primary" *ngIf="isLoggedIn">Get Started</a>
                 <em class="or">or</em>
                 <a
                   href="https://vimeo.com/channels/staffpicks/93951774"
@@ -342,7 +346,7 @@
                 data-to="15"
                 data-speed="1500"
                 data-refresh-interval="50"
-                >1</span
+                >15</span
               >M+</span
             >
             <span class="counter-label">Downloads</span>
@@ -363,8 +367,8 @@
                 data-to="400"
                 data-speed="1500"
                 data-refresh-interval="50"
-                >1</span
-              >+</span
+                >400</span
+              >M+</span
             >
             <span class="counter-label">Happy Clients</span>
           </div>
@@ -381,10 +385,10 @@
               ><span
                 class="js-counter"
                 data-from="0"
-                data-to="9"
+                data-to="12"
                 data-speed="1500"
                 data-refresh-interval="50"
-                >1</span
+                >12</span
               >K+</span
             >
             <span class="counter-label">Movies</span>
@@ -405,8 +409,8 @@
                 data-to="12"
                 data-speed="1500"
                 data-refresh-interval="50"
-                >1</span
-              >M+</span
+                >12</span
+              >B+</span
             >
             <span class="counter-label">Hours Spent</span>
           </div>
@@ -464,100 +468,15 @@
             movies today. Give us your time and <strong>moneyyyy</strong>!!!
           </p>
           <p>
-            <button type="submit" class="btn btn-primary">Get Started</button>
+            <button routerLink="/login" class="btn btn-primary" *ngIf="!isLoggedIn">Get Started</button>
+            <button routerLink="/browser" class="btn btn-primary" *ngIf="isLoggedIn">Get Started</button>
+
           </p>
         </div>
       </div>
     </div>
   </div>
-
-  <footer id="fh5co-footer" role="contentinfo">
-    <div class="container">
-      <div class="row row-pb-md">
-        <div class="col-md-4 fh5co-widget">
-          <h3>Koality.</h3>
-          <p>
-            Disclaimer: This is a personal project developed by
-            <a target="_blank" href="https://henrykhoanguyen.com"
-              >Khoa Nguyen</a
-            >
-            for fun and learning purposes. Please do not attempt to buy or put
-            in any sensitive information about you on this website.
-          </p>
-          <p><a href="#">Learn More</a></p>
-        </div>
-        <div class="col-md-2 col-sm-4 col-xs-6 col-md-push-1">
-          <ul class="fh5co-footer-links">
-            <li><a href="#">About</a></li>
-            <li><a href="#">Help</a></li>
-            <li><a href="#">Contact</a></li>
-            <li><a href="#">Terms</a></li>
-            <li><a href="#">Meetups</a></li>
-          </ul>
-        </div>
-
-        <div class="col-md-2 col-sm-4 col-xs-6 col-md-push-1">
-          <ul class="fh5co-footer-links">
-            <li><a href="#">Shop</a></li>
-            <li><a href="#">Privacy</a></li>
-            <li><a href="#">Testimonials</a></li>
-            <li><a href="#">Handbook</a></li>
-            <li><a href="#">Held Desk</a></li>
-          </ul>
-        </div>
-
-        <div class="col-md-2 col-sm-4 col-xs-6 col-md-push-1">
-          <ul class="fh5co-footer-links">
-            <li><a href="#">Find Designers</a></li>
-            <li><a href="#">Find Developers</a></li>
-            <li><a href="#">Teams</a></li>
-            <li><a href="#">Advertise</a></li>
-            <li><a href="#">API</a></li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="row copyright">
-        <div class="col-md-12 text-center">
-          <p>
-            <small class="block">&copy; 2021 All Rights Reserved.</small>
-            <small class="block"
-              >Designed by
-              <a href="https://henrykhoanguyen.com" target="_blank"
-                >Khoa Nguyen</a
-              >
-              Demo Images:
-              <a href="http://unsplash.com/" target="_blank">Unsplash</a></small
-            >
-          </p>
-          <div>
-            <ul class="fh5co-social-icons">
-              <li>
-                <a href="https://henrykhoanguyen.com"
-                  ><i class="icon-globe"></i
-                ></a>
-              </li>
-              <li>
-                <a href="mailto:henrykhoanguyen@gmail.com"
-                  ><i class="icon-mail"></i
-                ></a>
-              </li>
-              <li>
-                <a href="https://www.linkedin.com/in/henrykhoanguyen/"
-                  ><i class="icon-linkedin"></i
-                ></a>
-              </li>
-              <li>
-                <a href="https://github.com/henrykhoanguyen"
-                  ><i class="icon-github"></i
-                ></a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </footer>
+  <app-footer></app-footer>
 </div>
 
 <div class="gototop js-top">

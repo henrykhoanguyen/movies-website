@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { MoviesService } from '../../services/movies.service';
+import { AuthService } from 'src/app/services/auth.service';
+import { MoviesService } from 'src/app/services/movies.service';
+
 @Component({
   selector: 'app-main-page',
   templateUrl: './main-page.component.html',
@@ -7,10 +9,9 @@ import { MoviesService } from '../../services/movies.service';
 })
 export class MainPageComponent implements OnInit {
   movieData = null;
-  pagination;
+  isLoggedIn = this.authService.isLoggedIn();
 
-  constructor(private moviesService: MoviesService) {
-  }
+  constructor(private moviesService: MoviesService, private authService: AuthService) {}
 
   ngOnInit() {
 
@@ -21,4 +22,7 @@ export class MainPageComponent implements OnInit {
 
   }
 
+  logout() {
+    this.authService.logOut();
+  }
 }
