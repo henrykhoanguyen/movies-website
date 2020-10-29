@@ -7,6 +7,7 @@ import { MainPageComponent } from './pages/main-page/main-page.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 import { BrowserPageComponent } from './pages/browser-page/browser-page.component';
+import { AboutPageComponent } from './pages/about-page/about-page.component';
 
 const routes: Routes = [
   { path: '', component: MainPageComponent },
@@ -15,6 +16,11 @@ const routes: Routes = [
   {
     path: 'browser',
     component: BrowserPageComponent,
+    canActivate: [AuthGuardService]
+  },
+  {
+    path: 'about',
+    component: AboutPageComponent,
     canActivate: [AuthGuardService]
   },
   { path: '**', component: PageNotFoundComponent }

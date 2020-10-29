@@ -14,6 +14,7 @@ import { AboutPageComponent } from './pages/about-page/about-page.component';
 import { MoviesPageComponent } from './pages/movies-page/movies-page.component';
 import { SinglePageComponent } from './pages/single-page/single-page.component';
 import { ContactPageComponent } from './pages/contact-page/contact-page.component';
+import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { ContactPageComponent } from './pages/contact-page/contact-page.componen
     AboutPageComponent,
     MoviesPageComponent,
     SinglePageComponent,
-    ContactPageComponent
+    ContactPageComponent,
+    NavBarComponent
   ],
   imports: [
     BrowserModule,

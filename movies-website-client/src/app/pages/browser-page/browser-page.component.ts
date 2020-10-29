@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from 'src/app/services/auth.service';
+// Services
 import { MoviesService } from 'src/app/services/movies.service';
 
 @Component({
@@ -9,13 +9,9 @@ import { MoviesService } from 'src/app/services/movies.service';
 })
 export class BrowserPageComponent implements OnInit {
 
-  constructor(private moviesService: MoviesService, private authService: AuthService) { }
+  constructor(private moviesService: MoviesService) { }
 
   ngOnInit() {
-  }
-
-  logout() {
-    this.authService.logOut();
   }
 
 }
