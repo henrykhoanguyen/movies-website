@@ -10,9 +10,10 @@ import { MoviesService } from 'src/app/services/movies.service';
 })
 export class MainPageComponent implements OnInit {
   movieData = null;
-  isLoggedIn = this.authService.isLoggedIn;
+  isLoggedIn = this.authService.isLoggedIn();
 
-  constructor(private moviesService: MoviesService, private authService: AuthService) {}
+  constructor(private moviesService: MoviesService, private authService: AuthService) {
+  }
 
   ngOnInit() {
 

@@ -40,4 +40,10 @@ export class MoviesService {
       return data;
     });
   }
+
+  async getGenres() {
+    return await this.sendGetRequest(`/genres`).then(genres => {
+      return genres;
+    });
+  }
 }

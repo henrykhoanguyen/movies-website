@@ -25,6 +25,7 @@
           <li><a href="contact.html">Contact</a></li> -->
         </ul>
         <ul *ngIf="isLoggedIn">
+          <li [ngClass]="{'active': '/search'===currentURL}"><a href="/search"><i class="icon-search"></i></a></li>
           <li [ngClass]="{'active': '/'===currentURL}"><a href="/">Home</a></li>
           <li [ngClass]="{'active': '/browser'===currentURL}"><a href="/browser">Browse</a></li>
           <li [ngClass]="{'active': '/about'===currentURL}"><a href="/about">About</a></li>

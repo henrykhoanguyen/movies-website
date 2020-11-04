@@ -2,13 +2,20 @@ const ErrorResponse = require("../utils/errorResponse");
 const db = require('../config/db');
 const Movies = require('../model/Movies');
 const Stars = require('../model/Stars');
+const Genres = require('../model/Genres');
+const GenresInMovies = require('../model/GenresInMovies');
 const StarsInMovies = require('../model/StarsInMovies');
 const Op = db.Sequelize.Op;
 // Association
 Movies.hasMany(StarsInMovies, { foreignKey: 'movieId' });
+Movies.hasMany(GenresInMovies, { foreignKey: 'movieId' });
 Stars.hasMany(StarsInMovies, { foreignKey: 'starId' });
+Genres.hasMany(GenresInMovies, { foreignKey: 'genreId'});
+
 StarsInMovies.belongsTo(Movies, { foreignKey: 'movieId' });
 StarsInMovies.belongsTo(Stars, { foreignKey: 'starId' });
+GenresInMovies.belongsTo(Movies, { foreignKey: 'movieId'});
+GenresInMovies.belongsTo(Genres, { foreignKey: 'genreId'});
 
 
 // @desc    Get all movies
@@ -60,7 +67,7 @@ exports.getMovies = async (req, res, next) => {
 // @desc    Get single movie
 // @route   GET /api/v1/movies/:id
 // @access  Public
-exports.getMovieById = async (req, res, next) => {
+exports.getMoviesById = async (req, res, next) => {
   const id = req.params.id;
   const movie = await Movies.findByPk(id);
 
@@ -96,7 +103,7 @@ exports.getMovieById = async (req, res, next) => {
 // @desc    Get movies starts with letter
 // @route   GET /api/v1/movies/letter/:letter
 // @access  Public
-exports.getMovieByLetter = async(req, res, next) => {
+exports.getMoviesByLetter = async(req, res, next) => {
   const letter = req.params.letter;
 
   var movies = await Movies.findAll({
@@ -179,6 +186,60 @@ exports.search = async (req, res, next) => {
   });
 };
 
+
+// @desc    Get movies by genres
+// @route   GET /api/v1/movies/genre/:genre
+// @access  Public
+exports.getMoviesByGenre = async(req, res, next) => {
+  
+  var genre = { [Op.eq]: `${req.params.genre}` };
+  
+  var movies = await Movies.findAll({ 
+    where: {
+      '$genres_in_movies.genre.name$': genre
+    },
+    include: [{
+      attributes: [],
+      model: GenresInMovies,
+      include: [{
+        model: Genres
+      }]
+    }],
+    order: ['title']
+  });
+  
+  // Get stars from movies
+  movies = await getStars(movies);
+  
+  if (!movies || movies.length === 0) {
+    return next(new ErrorResponse("No record was found...", "NoRecord", 404));
+  }
+  
+  
+  res.status(200).json({
+    success: true,
+    size: movies.length,
+    data: movies
+  });
+};
+
+// @desc    Get all genres
+// @route   GET /api/v1/movies/genres/
+// @access  Public
+exports.getGenres = async(req, res, next) => {
+  var genres = await Genres.findAll({});
+  
+  if (!genres || genres.length === 0) {
+    return next(new ErrorResponse("No record was found...", "NoRecord", 404));
+  }
+  
+  res.status(200).json({
+    success: true,
+    size: genres.length || 0,
+    data: genres
+  });
+}
+
 const getStars = async (movies) => {
   
     for(var i = 0; i < movies.length; i++) {
@@ -203,3 +264,5 @@ const getStars = async (movies) => {
 
     return movies;
 };
+
+// TODO: write getGenres for all movies
