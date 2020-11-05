@@ -36,15 +36,19 @@
 				</div>
 			</div>
 
-			<div class="row">
-				<div class="col-md-3 col-sm-6">
-					<div class="feature-center animate-box text-center" data-animate-effect="fadeInUp">
-						<span class="icon">
-							<i class="icon-video2"></i>
-						</span>
-						<h3>Genre</h3>
-					</div>
-				</div>
+			<div class="row" *ngIf="genres">
+        <div *ngFor="let genre of genres">
+          <a (click)="getMoviesFromGenre(genre.id)" style="cursor: pointer;">
+            <div class="col-md-3 col-sm-6">
+              <div class="feature-center text-center" data-animate-effect="fadeInUp">
+                <span class="icon">
+                  <i class="icon-video2"></i>
+                </span>
+                <h3>{{genre.name}}</h3>
+              </div>
+            </div>
+          </a>
+        </div>
 
 				<!-- <div class="col-md-4 col-sm-6 fh5co-project animate-box" data-animate-effect="fadeIn">
 					<a href="#"><img src="../../../assets/images/work-2.jpg" alt="Free HTML5 Website Template by gettemplates.co" class="img-responsive">

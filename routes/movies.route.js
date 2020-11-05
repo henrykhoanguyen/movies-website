@@ -2,7 +2,7 @@ const express = require("express");
 
 const {
   getMovies,
-  getMoviesById,
+  getMovieById,
   getMoviesByLetter,
   search,
   getMoviesByGenre,
@@ -17,7 +17,7 @@ router.route("/").get(getMovies);
 router.route("/search?:query").get(search);
 router.route("/letter/:letter").get(getMoviesByLetter);
 router.route("/genres").get(protect, getGenres);
-router.route("/:id").get(protect, getMoviesById);
+router.route("/:id").get(protect, getMovieById);
 router.route("/genre/:genre").get(protect, getMoviesByGenre);
 
 module.exports = router;

@@ -30,6 +30,8 @@ exports.getMovies = async (req, res, next) => {
 
   // Get stars from movies
   movies = await getStars(movies);
+  // Get genres of movies
+  movies = await getGenres(movies);
 
   // console.log(movies);
 
@@ -67,7 +69,7 @@ exports.getMovies = async (req, res, next) => {
 // @desc    Get single movie
 // @route   GET /api/v1/movies/:id
 // @access  Public
-exports.getMoviesById = async (req, res, next) => {
+exports.getMovieById = async (req, res, next) => {
   const id = req.params.id;
   const movie = await Movies.findByPk(id);
 
@@ -87,6 +89,22 @@ exports.getMoviesById = async (req, res, next) => {
 
   movie.dataValues.starsSize = stars.length || 0;
   movie.dataValues.stars = stars;
+
+
+  const genres = await Genres.findAll({
+    include: [{
+      attributes: [],
+      model: GenresInMovies,
+      where: {
+        movieId: movieId
+      }
+    }],
+    required: false,
+    order: ['name']
+  });
+      
+  movie.dataValues.genresSize = genres.length || 0;
+  movie.dataValues.genres = genres;
 
   if (!movie || movie === []) {
     return next(new ErrorResponse("No record was found...", "NoRecord", 404));
@@ -114,6 +132,8 @@ exports.getMoviesByLetter = async(req, res, next) => {
   });
 
   movies = await getStars(movies);
+  // Get genres of movies
+  movies = await getGenres(movies);
 
   res.status(200).json({
     success: true,
@@ -153,7 +173,8 @@ exports.search = async (req, res, next) => {
 
     // console.log(movies)
     movies = await getStars(movies);
-
+    // Get genres of movies
+    movies = await getGenres(movies);
   } else {
     // SEARCH MOVIES BY TITLE, YEAR, DIRECTOR
     // Setting query condition
@@ -173,6 +194,8 @@ exports.search = async (req, res, next) => {
 
     // Get stars from movies
     movies = await getStars(movies);
+    // Get genres of movies
+    movies = await getGenres(movies);
   }
 
   if (!movies || movies.length === 0) {
@@ -208,8 +231,10 @@ exports.getMoviesByGenre = async(req, res, next) => {
     order: ['title']
   });
   
-  // Get stars from movies
+  // Get stars in movies
   movies = await getStars(movies);
+  // Get genres of movies
+  movies = await getGenres(movies);
   
   if (!movies || movies.length === 0) {
     return next(new ErrorResponse("No record was found...", "NoRecord", 404));
@@ -258,11 +283,33 @@ const getStars = async (movies) => {
         order: ['name']
       });
       
-      movies[i].dataValues.starsSize = stars.length;
+      movies[i].dataValues.starsSize = stars.length || 0;
       movies[i].dataValues.stars = stars;
     }
 
     return movies;
 };
 
-// TODO: write getGenres for all movies
+const getGenres = async (movies) => {
+
+  for(var i = 0; i < movies.length; i++) {
+    var movieId = movies[i].dataValues.id;
+
+    const genres = await Genres.findAll({
+      include: [{
+        attributes: [],
+        model: GenresInMovies,
+        where: {
+          movieId: movieId
+        }
+      }],
+      required: false,
+      order: ['name']
+    });
+    
+    movies[i].dataValues.genresSize = genres.length || 0;
+    movies[i].dataValues.genres = genres;
+  }
+
+  return movies;
+} 

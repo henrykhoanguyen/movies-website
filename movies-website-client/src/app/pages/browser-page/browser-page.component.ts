@@ -8,10 +8,19 @@ import { MoviesService } from 'src/app/services/movies.service';
   styleUrls: ['./browser-page.component.scss']
 })
 export class BrowserPageComponent implements OnInit {
+  genres = null;
 
   constructor(private moviesService: MoviesService) { }
 
   ngOnInit() {
+    this.moviesService.getGenres().then(data => {
+      console.log(data.data);
+      this.genres = data.data;
+    });
+  }
+
+  getMoviesFromGenre(id) {
+    console.log(id);
   }
 
 }

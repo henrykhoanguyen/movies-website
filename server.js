@@ -21,12 +21,12 @@ const auth = require('./routes/auth.route')
 
 const app = express();
 
+app.use(cors('http://localhost:4200'));
 // Body parser
 app.use(bodyParser.json());
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use(cors());
 
 app.use('/api/v1/movies', movies);
 app.use('/api/v1/auth', auth);

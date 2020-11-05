@@ -1,14 +1,19 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { environment } from '../../environments/environment';
+import { Injectable } from "@angular/core";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { environment } from "../../environments/environment";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class MoviesService {
+  private opts = {
+    headers: {
+      authorization: "Bearer " + sessionStorage.getItem("token"),
+    },
+  };
 
   constructor(private http: HttpClient) {
-    console.log('Movies service initiated...');
+    console.log("Movies service initiated...");
   }
 
   private sendGetRequest(endpoint: string): Promise<any> {
@@ -18,7 +23,9 @@ export class MoviesService {
     // });
 
     return Promise.resolve(
-      this.http.get(environment.expressBaseUrl + endpoint).toPromise()
+      this.http
+        .get(environment.expressBaseUrl + endpoint, this.opts)
+        .toPromise()
     );
   }
 
@@ -30,20 +37,29 @@ export class MoviesService {
     // });
 
     return Promise.resolve(
-      this.http.post(environment.expressBaseUrl + endpoint, body).toPromise()
+      this.http
+        .post(environment.expressBaseUrl + endpoint, this.opts, body)
+        .toPromise()
     );
   }
 
   async getRecentMovies(query: string) {
-    return await this.sendGetRequest(`/movies${query}`).then(data => {
+    return await this.sendGetRequest(`/movies${query}`).then((data) => {
       // console.log(data);
       return data;
     });
   }
 
-  async getGenres() {
-    return await this.sendGetRequest(`/genres`).then(genres => {
+  getGenres = async () => {
+    return await this.sendGetRequest("/movies/genres").then((genres) => {
+      // console.log(genres);
       return genres;
+    });
+  }
+
+  getMoviesFromGenre = async (genre) => {
+    return await this.sendGetRequest(`/movies/`).then((movies) => {
+      console.log(movies);
     });
   }
 }
