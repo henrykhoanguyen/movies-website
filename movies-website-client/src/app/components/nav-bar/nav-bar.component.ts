@@ -10,6 +10,7 @@ import { AuthService } from 'src/app/services/auth.service';
 export class NavBarComponent implements OnInit {
   isLoggedIn = this.authService.isLoggedIn();
   currentURL = this.router.url;
+  search = null;
 
   constructor(private authService: AuthService, private router: Router) { }
 
@@ -19,6 +20,13 @@ export class NavBarComponent implements OnInit {
 
   logout() {
     this.authService.logOut();
+  }
+
+  onSubmit(data){
+    // console.log(data);
+    if (data.title) {
+      this.router.navigate(['/movies'], {queryParams: {search: true, title: data.title}});
+    }
   }
 
 }

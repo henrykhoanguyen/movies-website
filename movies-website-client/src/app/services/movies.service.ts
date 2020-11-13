@@ -57,9 +57,21 @@ export class MoviesService {
     });
   }
 
-  getMoviesFromGenre = async (genre) => {
-    return await this.sendGetRequest(`/movies/`).then((movies) => {
-      console.log(movies);
+  getMoviesFromGenre = async (genreId) => {
+    return await this.sendGetRequest(`/movies/genre/${genreId}`).then((movies) => {
+      return movies;
     });
+  }
+
+  getMovies = async (data) => {
+    // console.log(data);
+    if (data.search) {
+
+      const queryString = Object.keys(data).map(key => key + '=' + data[key]).join('&');
+
+      return await this.sendGetRequest(`/movies/search?${queryString}`).then(movies => {
+        return movies;
+      });
+    }
   }
 }

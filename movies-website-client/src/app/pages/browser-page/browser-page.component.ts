@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 // Services
 import { MoviesService } from 'src/app/services/movies.service';
 
@@ -10,7 +11,7 @@ import { MoviesService } from 'src/app/services/movies.service';
 export class BrowserPageComponent implements OnInit {
   genres = null;
 
-  constructor(private moviesService: MoviesService) { }
+  constructor(private moviesService: MoviesService, private router: Router) { }
 
   ngOnInit() {
     this.moviesService.getGenres().then(data => {
@@ -20,7 +21,7 @@ export class BrowserPageComponent implements OnInit {
   }
 
   getMoviesFromGenre(id) {
-    console.log(id);
+    this.router.navigate(['/movies'], {queryParams: {search: false, genreId: id}});
   }
 
 }

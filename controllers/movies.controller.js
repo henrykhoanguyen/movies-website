@@ -151,6 +151,8 @@ exports.search = async (req, res, next) => {
   const condition = {}
   var movies = null;
 
+  // console.log(req.query);
+
   if (req.query.starName){
     // SEARCH MOVIES BY STAR'S NAME
     // Setting query condition
@@ -190,7 +192,7 @@ exports.search = async (req, res, next) => {
 
     // Get movies from database
     movies = await Movies.findAll({ where: condition, order: ['title'] });
-    console.log(movies);
+    // console.log(movies);
 
     // Get stars from movies
     movies = await getStars(movies);
@@ -211,15 +213,15 @@ exports.search = async (req, res, next) => {
 
 
 // @desc    Get movies by genres
-// @route   GET /api/v1/movies/genre/:genre
+// @route   GET /api/v1/movies/genre/:genreId
 // @access  Public
 exports.getMoviesByGenre = async(req, res, next) => {
   
-  var genre = { [Op.eq]: `${req.params.genre}` };
+  var genreId = { [Op.eq]: `${req.params.genreId}` };
   
   var movies = await Movies.findAll({ 
     where: {
-      '$genres_in_movies.genre.name$': genre
+      '$genres_in_movies.genre.id$': genreId
     },
     include: [{
       attributes: [],

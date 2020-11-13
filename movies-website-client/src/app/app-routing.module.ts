@@ -8,6 +8,7 @@ import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 import { BrowserPageComponent } from './pages/browser-page/browser-page.component';
 import { AboutPageComponent } from './pages/about-page/about-page.component';
+import { MoviesPageComponent } from './pages/movies-page/movies-page.component';
 
 const routes: Routes = [
   { path: '', component: MainPageComponent },
@@ -16,6 +17,11 @@ const routes: Routes = [
   {
     path: 'browser',
     component: BrowserPageComponent,
+    canActivate: [AuthGuardService]
+  },
+  {
+    path: 'movies',
+    component: MoviesPageComponent,
     canActivate: [AuthGuardService]
   },
   {
